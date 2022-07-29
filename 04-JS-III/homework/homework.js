@@ -78,14 +78,14 @@ function arrayContiene(array, elemento) {
   // Comprueba si el elemento existe dentro de "array"
   // Devuelve "true" si está, o "false" si no está
   // Tu código:
-  /* NO funciona este
-  for (var i=0; i<elemento.length; i++){
+  
+  for (var i=0; i<array.length; i++){
     if (array[i]===elemento) return true;      
     }    
     return false
-  }
-  */
-  return array.includes(elemento);
+  
+  
+  //  return array.includes(elemento);
 }
 
 
@@ -180,20 +180,42 @@ function empiezaConNueve(n) {
   //Desarrolle una función que recibe como parámetro un número entero n. Debe retornar true si el entero 
   //inicia con 9 y false en otro caso.
   //Escribe tu código aquí
-  let numero = n.toString();
-  let primerNum = numero.split("");
-  if (primerNum[0] === "9") return true;
-  return false;
+
+  var string = n + "";
+  if (string[0] === "9") {
+    return true;
+  } else {
+    return false
+  }
 }
+
+
+/*
+let numero = n.toString();
+let primerNum = numero.split("");
+if (primerNum[0] === "9") return true;
+return false;
+}
+*/
 
 
 function todosIguales(arreglo) {
   //Escriba la función todosIguales, que indique si todos los elementos de un arreglo son iguales:
   //retornar true, caso contrario retornar false.
   //Escribe tu código aquí  
-  let igual = arreglo.every((e) => e === arreglo[0]); // cada elemento del arreglo es igual a la posición cero. Método every retorna tue o flase
-  return igual
+  var aux = arreglo[0];
+  for (var i = 0; i < arreglo.length; i++) {
+    if (arreglo[i] !== aux) return false;
+
+  }
+  return true
+
 }
+/*
+let igual = arreglo.every((e) => e === arreglo[0]); // cada elemento del arreglo es igual a la posición cero. Método every retorna tue o flase
+return igual
+}
+*/
 
 
 function mesesDelAño(array) {
@@ -201,10 +223,27 @@ function mesesDelAño(array) {
   // "Enero", "Marzo" y "Noviembre", guardarlo en nuevo array y retornarlo.
   //Si alguno de los meses no está, devolver: "No se encontraron los meses pedidos"
   // Tu código:
-  let meses = array.filter((e) => e === "Enero" || e === "Marzo" || e === "Noviembre");
-  if (meses.length < 3) return "No se encontraron los meses pedidos";
-  return meses;
+  var miArray = [];
+  for (let i = 0; i < array.length; i++) {
+    var unMesDado = array[i];
+    if (unMesDado == "Enero" || unMesDado === "Marzo" || unMesDado === "Noviembre") {
+      miArray.push(unMesDado)
+    }
+  }
+  if (miArray.length !== 3) {
+    return "No se encontraron los meses pedidos";
+  }
+  return miArray
+
 }
+
+/*
+let meses = array.filter((e) => e === "Enero" || e === "Marzo" || e === "Noviembre");
+if (meses.length < 3) return "No se encontraron los meses pedidos";
+return meses;
+*/
+
+
 
 
 function mayorACien(array) {
@@ -258,14 +297,14 @@ function continueStatement(numero) {
   // Tu código:
   let newArray = [];
   for (let i = 0; i < 10; i++) {
-      if (i === 5) {
-        continue;
-      }
+    if (i === 5) {
+      continue; //saltea esa vuelta
+    }
     numero = numero + 2;
     newArray.push(numero);
-     }
-     return newArray;
   }
+  return newArray;
+}
 // No modificar nada debajo de esta línea
 // --------------------------------
 
