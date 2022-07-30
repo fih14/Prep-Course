@@ -12,6 +12,16 @@ function deObjetoAmatriz(objeto) {
   //Escribe tu código aquí
 
   // return Object.entries(objeto)  Orea forma más compleja
+
+  /*
+  var arreglo = [];
+  for (var keys in objeto) {
+    arreglo.push([keys, objeto[keys]]);
+  }
+  return arreglo
+  */
+
+
   var arreglo = [];
   for (var clave in objeto) {
     arreglo.push([clave, objeto[clave]]);
@@ -25,23 +35,36 @@ function numberOfCharacters(string) {
   //en formato par clave-valor.
   //Ej: Recibe ---> "adsjfdsfsfjsdjfhacabcsbajda" || Devuelve ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 } 
   //Escribe tu código aquí
-  /*var obj = {}
+  var obj = {}
   for (let i = 0; i < string.length; i++) {
-    if (!obj[string[i]]){
-      obj[string[i]]=0;
-    };
-    obj[string[i]] +=1
+    if (!obj[string[i]]){ //si no existe en el obj el string determinado con la posición i
+      obj[string[i]]=0;   // que lo agregue y que su valor sea cero
+    };                    // Omitir el else para que sigua haciendo, pasa en conjunto
+    obj[string[i]] +=1    //si existe que le sume 1, sin ELSE
   }
   return obj;
-  */
-  var objeto = {};
+
+  /*
+  var obj = {}
   for (let i = 0; i < string.length; i++) {
-    if (!objeto.hasOwnProperty(string[i])) {
+    if (!obj[string[i]]){ //si no existe en el obj el string determinado con la posición i
+      obj[string[i]]=1;   // que lo agregue y que su valor sea 1
+    } else{                
+    obj[string[i]] +=1    //si existe que le sume 1
+  }
+  return obj;
+
+  */
+  
+  /*var objeto = {};
+  for (let i = 0; i < string.length; i++) {
+    if (!objeto.hasOwnProperty(string[i])) { //Si el objeto no tiene esa propiedad (letra) con sus valores
       objeto[string[i]] = 0
     }
     objeto[string[i]] += 1      // objeto[string[i]]++ otra forma
   }
   return objeto;
+  */
 }
 
 
@@ -83,10 +106,12 @@ function asAmirror(str) {
   //Ej: Recibe ---> "The Henry Challenge is close!" || Devuelve ---> "ehT yrneH egnellahC si !esolc"
   //Escribe tu código aquí
 
-  var invertida = str.split(" ").map(function (elemento) {
-    return elemento.split("").reverse().join("")  //split " " con espacios como referencia ["The", "Henry", ..]
-  })                                              // map separa el resto "T" "h" "e"    "e" "h" "T"  "ehT". .spot lo convierte en arreglo, reverse es metodo de array
-  return invertida.join(" ")
+    
+  var invertida = str.split(" ").map(function (elemento) {  //split separa la cadena donde tenga espacios separado por espacios y lo convierte en arreglo, map para hacer en cada elemento del arreglo lo mismo, que es todo lo de abajo
+    return elemento.split("").reverse().join("")  //split  separa caracter por caracter con "" y lo convierte en arreglo, cuando la separemos aplicamos reverse al string para darlo vuelta, luego con join convierte el arreglo en string separandolo con " "
+  })                                              
+  return invertida.join(" ")                      // join convierte a un string separdo por " ",lo que estaba en la matriz hguardada en invertida
+  
 }
 
 
@@ -130,12 +155,30 @@ function sortArray(arr) {
   //Ej: Recibe ---> ["You", "are", "beautiful", "looking"] || Devuelve ---> [“You", "are", "looking", "beautiful"]
   //Escribe tu código aquí
 
-  for (let i = 0; i < arr.length -1; i++) {
-     while (arr[i].length > arr[i+1].length){
-      var aux=arr[i];
-      arr[i] = arr[i+1];
-      arr[i+1] = aux;
-      i--;        
+  /* Mas complejo
+  var recorrido = true;
+  while (recorrido){
+    recorrido = false;
+    for (var i = 0; i < arr.length -1; i++) {
+      if(arr[i].length > arr[i+1].length {
+        var palabralarga=arr[i];
+        arr[i] = arr[i+1];
+        arr[i+1] = palabralarga;
+        recorrido=true;
+      }
+    }
+  }
+  return arr
+
+
+  */
+
+  for (let i = 0; i < arr.length -1; i++) {  //Hasta el penultimo por el i+1, para que no se vuelva undefined
+     while (arr[i].length > arr[i+1].length){ //Si va if,una vez se cumple la condición, deja de ejecutarlo. while hará que el ciclo se repita pero con i-- para que no sea loop infinito
+      var aux=arr[i];  //Guarda en el auxiliar la palabra más larga
+      arr[i] = arr[i+1];   //la palabra mas corta pasa al la izquierda
+      arr[i+1] = aux;      //la palabra más larga, guardada en aux, pasa a la derecha
+      i--;        // decremento, por cada iteración disminuye el valor de i para que no sea loop infinito
       }
     
   }
